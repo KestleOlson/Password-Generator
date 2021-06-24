@@ -1,12 +1,30 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
-var lowerCase = "abcdefghijklmnopqrstuvwxyz";
-var upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-var numeric = "0123456789";
-var special = "!$^&*-=+_?";
-var Arraylength = plength
-// var allChars = lowerCase + upperCase + numeric + special 
 
+// Functions to create variables 
+
+function Randomlower() {
+  return String.fromCharCode(Math.floor(Math.random()*26)+97);
+}
+
+function Randomupper () {
+  return String.fromCharCode(Math.floor(Math.random()*26)+65);
+}
+
+function Randomnumber () {
+  return String.fromCharCode(Math.floor(Math.random()*10)+48);
+}
+
+function Randomspecial () {
+  var special = "!$^&*-=+_?"
+  return special[Math.floor(Math.random() * special.length)];
+}
+
+const Randomgen = {
+    lower: Randomlower, 
+    upper: Randomupper, 
+    number: Randomnumber, 
+    speical: Randomspecial}
 
 // Write password to the #password input
 function writePassword() {
@@ -17,43 +35,60 @@ function writePassword() {
 
 }
 
+//generate password 
+
 function generatePassword() {
   var plength = prompt("How many characters do you want in your password");
-    console.log(plength);
-  if (confirm("Do you want to include lowercase?")) {
-    //add lower case to password//
-    var randomlc = Math.floor(Math.random()*lowerCase.length)
-    var chosenlc = lowerCase[randomlc]
-    console.log(chosenlc)
-   } else {
-    //do nothing//
-  }
+  var length = parseInt(plength);
+    
+    console.log(plength)
+    console.log(length)
+    console.log(typeof length)
+    console.log(typeof plength)
+  
+  const checklower = confirm("Do you want to include lowercase?");
+    // const includelower = checklower.true;
+    console.log(checklower);
+    
+  const checkupper = confirm("Do you want to include uppercase?");  
+    //  const includeupper = checkupper.true;
+    console.log(checkupper);
+  
+  const checkspecial = confirm("Do you want to include a special character?");
+    // const includespecial = checkspecial.true;
+    console.log(checkspecial);
+  
+  const checknumber = confirm("Do you want to include a number?");
+    // const includenumber = checknumber.true;
+    console.log(checknumber);
+  
+  // function organizePassword(length,checklower,checkupper,checkspecial,checknumber){
+    var generatedPassword = "";
+    
+    const typesCount = checklower + checkupper + checknumber + checkspecial;
+    console.log('typesCount:', typesCount);
 
-  if (confirm("Do you want to include uppercase?")) {
-    //add lower case to password//
-    var randomuc = Math.floor(Math.random()*upperCase.length)
-    var chosenuc = upperCase[randomuc]
-    console.log(chosenuc)
-   } else {
-    //do nothing//
-  }
+    const typesArr = [{checklower}, {checkupper}, {checknumber}, {checkspecial}].filter(item => Object.values(item)[0]);
+      console.log('typesArr:', typesArr)
 
-  if (confirm("Do you want to include a special character?")) {
-    //add special character to password//
-    var randomsc = Math.floor(Math.random()*special.length)
-    var chosensc = special[randomsc]
-    console.log(chosensc)
-  } else {
-    //do nothing//
-  }
+    if(typesCount === 0) {
+      return alert('please select one');
+    }
 
-  if (confirm("Do you want to include a number?")) {
-    //add number to password//
-    var randomnum = Math.floor(Math.random()*numeric.length)
-    console.log(randomnum)
-  } else {
-    // do nothing//
-  }
+    if(length<7 || length>128) {
+      return alert('length must be between 0 and 128')
+    }
+
+    for(let i=0; i<length; i+=typesCount) {
+      typesArr.forEach(type => {
+        const funcName = Object.keys(type)[0];
+          console.log('funcName', funcName);
+
+        generatedPassword += Randomgen[funcName]();
+        console.log(generatedPassword)
+      });
+    }
+  // }
 }
 
 
