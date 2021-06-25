@@ -9,13 +9,13 @@ Using initial code provided a password generate is created allowing the user to 
 
 ## Installation
 
-* [Horiseon Marketing Webpage](https://kestleolson.github.io/code-refactor1/index.html)
+* [Password Generator Webpage](https://kestleolson.github.io/Password-Generator/)
 
-* [Github Repo](https://github.com/KestleOlson/code-refactor1)
+* [Github Repo](git@github.com:KestleOlson/Password-Generator.git)
 
 ## Usage
 
-![Image of Horiseon Webpage](assets/images/code-refactor1-Horiseon.png)
+![Image of Password Generator](assets/images/Capture.PNG)
 
 ## Credits
 * [https://www.w3schools.com/]
