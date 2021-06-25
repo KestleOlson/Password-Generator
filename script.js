@@ -3,28 +3,19 @@ var generateBtn = document.querySelector("#generate");
 
 // Functions to create variables 
 
-function Randomlower() {
-  return String.fromCharCode(Math.floor(Math.random()*26)+97);
-}
+// function Randomlower() {
+  const lower = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
+  const upper = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
+  const number = ["0","1","2","3","4","5","6","7","8","9"]
+  const special = [",","!","#","$","%","&","(",")","*","+","-","/",":",";","<","=",">","?","@","[","^","_","`","{","|","~"]
 
-function Randomupper () {
-  return String.fromCharCode(Math.floor(Math.random()*26)+65);
-}
-
-function Randomnumber () {
-  return String.fromCharCode(Math.floor(Math.random()*10)+48);
-}
-
-function Randomspecial () {
-  var special = "!$^&*-=+_?"
-  return special[Math.floor(Math.random() * special.length)];
-}
-
-const Randomgen = {
-    lower: Randomlower, 
-    upper: Randomupper, 
-    number: Randomnumber, 
-    speical: Randomspecial}
+  // let Randomgen = {
+  //   checklower: checklower, 
+  //   checkupper: checkupper, 
+  //   checknumber: checknumber, 
+  //   checkspeical: checkspecial,
+  //   nlength: nlength,
+  //  }
 
 // Write password to the #password input
 function writePassword() {
@@ -38,12 +29,13 @@ function writePassword() {
 //generate password 
 
 function generatePassword() {
-  var plength = prompt("How many characters do you want in your password");
-  var length = parseInt(plength);
+ 
+ var plength = prompt("How many characters do you want in your password");
+  const nlength = parseInt(plength)
     
     console.log(plength)
-    console.log(length)
-    console.log(typeof length)
+    console.log(nlength)
+    console.log(typeof nlength)
     console.log(typeof plength)
   
   const checklower = confirm("Do you want to include lowercase?");
@@ -61,36 +53,83 @@ function generatePassword() {
   const checknumber = confirm("Do you want to include a number?");
     // const includenumber = checknumber.true;
     console.log(checknumber);
-  
-  // function organizePassword(length,checklower,checkupper,checkspecial,checknumber){
-    var generatedPassword = "";
-    
-    const typesCount = checklower + checkupper + checknumber + checkspecial;
-    console.log('typesCount:', typesCount);
 
-    const typesArr = [{checklower}, {checkupper}, {checknumber}, {checkspecial}].filter(item => Object.values(item)[0]);
-      console.log('typesArr:', typesArr)
+    const Randomgen = {
+      checklower: checklower, 
+      checkupper: checkupper, 
+      checknumber: checknumber, 
+      checkspeical: checkspecial,
+      nlength: nlength,
+     }
 
-    if(typesCount === 0) {
-      return alert('please select one');
-    }
-
-    if(length<7 || length>128) {
+    if(nlength<7 || nlength>128) {
       return alert('length must be between 0 and 128')
     }
 
-    for(let i=0; i<length; i+=typesCount) {
-      typesArr.forEach(type => {
-        const funcName = Object.keys(type)[0];
-          console.log('funcName', funcName);
+    if(checklower === 0 && checkupper === 0 && checkspecial === 0 && checknumber ===0) {
+      return alert('please select one');
+    } 
 
-        generatedPassword += Randomgen[funcName]();
-        console.log(generatedPassword)
-      });
-    }
-  // }
+    var output = "";
+
+    for( var i=0; output <= nlength; i++){
+     
+      if(checklower){
+      var lowervalue = lower[Math.floor(Math.random()*lower.length)]
+      output += lowervalue     
+      };
+
+      if(checkupper){
+      var uppervalue = upper[Math.floor(Math.random()*upper.length)]
+      output += uppervalue
+      };
+
+      if(checkspecial){
+      var specialvalue = special[Math.floor(Math.random()*special.length)]
+      output += specialvalue
+      };
+
+      if(checknumber){
+      var numbervalue = special[Math.floor(Math.random()*number.length)]
+      output += numbervalue
+      };
+
+    console.log(lowervalue)
+    console.log(uppervalue)
+    console.log(specialvalue)
+    console.log(numbervalue)
+    
+}
+return output
+  
 }
 
+
+  
+
+
+//   // const typesCount = checklower + checkupper + checknumber + checkspecial;
+//   //   console.log('typesCount:', typesCount);
+
+//   // const typesArr = [{checklower}, {checkupper}, {checknumber}, {checkspecial}].filter(item => Object.values(item)[0]);
+//   //     console.log('typesArr:', typesArr)
+
+//   //   for(i=0; i<length; i+=typesCount) {
+//   //     typesArr.forEach(type => {
+//   //       const funcName = Object.keys(type)[0];
+//   //         console.log('funcName', funcName);
+
+//   //     })
+//   //   };
+// }  
+            
+    //       createdPassword += Randomgen(funcName);
+    //       console.log(createdPassword)
+    //   });
+  //   }
+  // }       
+
+   
 
 
 // Add event listener to generate button
